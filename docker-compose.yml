@@ -12,6 +12,8 @@ services:
       - ~/.composer-docker:/var/www/.composer
     ports:
       - 8080:80
+    environment:
+      XDEBUG_CONFIG: remote_host=host.docker.internal remote_port=9001
     depends_on: 
       - db
   db:
