@@ -1,5 +1,5 @@
 ARG PHP_VERSION=7.2
-FROM andypieters/php-apache:${PHP_VERSION}
+FROM whynotrin/apache-php:1.1
 
 
 COPY php.ini $PHP_INI_DIR/conf.d/zz-php.ini
