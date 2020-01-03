@@ -16,6 +16,8 @@ services:
       XDEBUG_CONFIG: remote_host=host.docker.internal remote_port=9001
     depends_on: 
       - db
+    networks:
+      - docker-bridge
   db:
     image: mariadb
     volumes:
@@ -25,15 +27,26 @@ services:
       MYSQL_USER: db
       MYSQL_PASSWORD: db
       MYSQL_DATABASE: db
+    networks:
+      - docker-bridge
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
       - 8181:80
     depends_on: 
       - db
+    networks:
+      - docker-bridge
   mailcatcher:
     image: schickling/mailcatcher
     ports:
       - 1080:1080
+    networks:
+      - docker-bridge
 volumes:
   db-data:
+networks:
+    docker-bridge:
+        driver: bridge
+        driver_opts:
+            com.docker.network.bridge.name: docker-bridge
